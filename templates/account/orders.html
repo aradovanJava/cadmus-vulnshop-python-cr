@@ -1,0 +1,12 @@
+{% extends "fragments/layout.html" %}
+{% block content %}
+<h1>Your orders</h1>
+<table>
+  <tr><th>Order</th><th>Total</th><th>Status</th></tr>
+  {% for o in orders %}
+  <tr><td><a href="/account/orders/{{ o['id'] }}">{{ o['id'] }}</a></td>
+      <td>{{ o['total'] }} EUR</td><td>{{ o['status'] }}</td></tr>
+  {% endfor %}
+</table>
+<p class="hint">Order numbers are sequential. Try changing one.</p>
+{% endblock %}

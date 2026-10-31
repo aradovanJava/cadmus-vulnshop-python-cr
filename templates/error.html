@@ -1,0 +1,9 @@
+{% extends "fragments/layout.html" %}
+{% block content %}
+<h1>Something went wrong</h1>
+<p>{{ message }}</p>
+<!-- M16 [A10] the traceback is rendered to whoever caused the error -------
+     File paths, package versions, local variable names and often fragments
+     of query text. Deliberate, working code — which is why no rule fires. -->
+<pre class="trace">{{ trace }}</pre>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends "fragments/layout.html" %}
+{% block content %}
+<h1>Support</h1>
+<form method="post">
+  <label>Subject <input name="subject"></label>
+  <label>Message <textarea name="body"></textarea></label>
+  <label>Attachment name <input name="attachment" value="receipt.txt"></label>
+  <button type="submit">Submit ticket</button>
+</form>
+<ul>
+  {% for t in tickets %}
+  <li><a href="/support/ticket/{{ t['id'] }}">{{ t['subject'] }}</a></li>
+  {% endfor %}
+</ul>
+{% endblock %}

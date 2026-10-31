@@ -1,0 +1,13 @@
+{% extends "fragments/layout.html" %}
+{% block content %}
+<h1>Catalogue</h1>
+<div class="grid">
+  {% for p in products %}
+  <div class="card">
+    <h3><a href="/shop/product/{{ p['id'] }}">{{ p['name'] }}</a></h3>
+    <p class="price">{{ p['price'] }} EUR</p>
+    <p class="stock">{{ p['stock'] }} in stock</p>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

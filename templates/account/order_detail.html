@@ -1,0 +1,11 @@
+{% extends "fragments/layout.html" %}
+{% block content %}
+<h1>Order {{ order['id'] }}</h1>
+<p>Placed {{ order['placed'] }} · {{ order['total'] }} EUR · {{ order['status'] }}</p>
+<table>
+  <tr><th>Product</th><th>Qty</th><th>Unit</th></tr>
+  {% for l in lines %}
+  <tr><td>{{ l['product_id'] }}</td><td>{{ l['quantity'] }}</td><td>{{ l['unit_price'] }}</td></tr>
+  {% endfor %}
+</table>
+{% endblock %}

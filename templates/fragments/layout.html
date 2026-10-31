@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>{% block title %}VulnShop{% endblock %}</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <!-- M15 [A08] external script with no integrity attribute -------------
+       No subresource integrity and no pinned version. If the CDN serves
+       something else — or is compromised — it executes with full access to
+       this page. A completely normal-looking script tag. -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+<header>
+  <a class="brand" href="/shop">VulnShop <span>{{ version }}</span></a>
+  <nav>
+    <a href="/shop">Shop</a>
+    <a href="/cart/">Cart</a>
+    <a href="/support/">Support</a>
+    {% if current_user %}
+      <a href="/account/profile">{{ current_user['username'] }}</a>
+      <a href="/account/orders">Orders</a>
+      {# M2: the Admin link is hidden, but /admin/users is not protected #}
+      {% if current_user['role'] == 'admin' %}<a href="/admin/users">Admin</a>{% endif %}
+      <a href="/account/logout">Log out</a>
+    {% else %}
+      <a href="/account/login">Log in</a>
+    {% endif %}
+  </nav>
+</header>
+<main>{% block content %}{% endblock %}</main>
+<footer>Training build — sandbox only. Seed addresses are .invalid.</footer>
+</body>
+</html>

@@ -1,0 +1,21 @@
+{% extends "fragments/layout.html" %}
+{% block content %}
+<h1>Your profile</h1>
+<form method="post" action="/api/users/{{ user['id'] }}/profile">
+  <label>Full name <input name="full_name" value="{{ user['full_name'] }}"></label>
+  <label>Email <input name="email" value="{{ user['email'] }}"></label>
+
+  <!-- M6 [A01] property-level over-disclosure -----------------------------
+       Four fields that are never displayed reach the browser anyway.
+       View source, or open dev tools, and the password hash, the role, the
+       internal risk score and the API token are all there. This is the read
+       half of M7: the endpoint that receives this form accepts every one of
+       these fields back. -->
+  <input type="hidden" name="password_hash" value="{{ user['password_hash'] }}">
+  <input type="hidden" name="role"          value="{{ user['role'] }}">
+  <input type="hidden" name="risk_score"    value="{{ user['risk_score'] }}">
+  <input type="hidden" name="api_token"     value="{{ user['api_token'] }}">
+
+  <button type="submit">Save</button>
+</form>
+{% endblock %}

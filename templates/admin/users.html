@@ -1,0 +1,15 @@
+{% extends "fragments/layout.html" %}
+{% block content %}
+<h1>Users</h1>
+<table>
+  <tr><th>ID</th><th>Username</th><th>Role</th><th>Email</th><th>Balance</th><th>Risk</th></tr>
+  {% for u in users %}
+  <tr><td>{{ u['id'] }}</td><td>{{ u['username'] }}</td><td>{{ u['role'] }}</td>
+      <td>{{ u['email'] }}</td><td>{{ u['balance'] }}</td><td>{{ u['risk_score'] }}</td></tr>
+  {% endfor %}
+</table>
+<form method="post" action="/admin/impersonate">
+  <label>Impersonate <input name="username" value="carol"></label>
+  <button type="submit">Go</button>
+</form>
+{% endblock %}

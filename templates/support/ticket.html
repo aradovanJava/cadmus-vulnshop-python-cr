@@ -1,0 +1,9 @@
+{% extends "fragments/layout.html" %}
+{% block content %}
+<!-- T6 [A05] stored cross-site scripting in the ticket subject ------------
+     Written by one user, rendered unescaped for whoever reads the ticket —
+     which is typically a support agent with a more privileged session. -->
+<h1>{{ ticket['subject']|safe }}</h1>
+<p>{{ ticket['body'] }}</p>
+<p><a href="/support/attachment?name={{ ticket['attachment'] }}">Attachment</a></p>
+{% endblock %}

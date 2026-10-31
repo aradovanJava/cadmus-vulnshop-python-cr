@@ -1,0 +1,20 @@
+{% extends "fragments/layout.html" %}
+{% block content %}
+<h1>{{ product['name'] }}</h1>
+<p class="price">{{ product['price'] }} EUR</p>
+
+<!-- T5 [A05] stored cross-site scripting -----------------------------------
+     The description is rendered with |safe, which disables the one control
+     Jinja2 gives you for free. The value is written by /api/products/<id>/
+     description, which has no role check (M18), so any visitor can store a
+     payload that executes for every subsequent viewer. -->
+<div class="description">{{ product['description']|safe }}</div>
+
+<form method="post" action="/cart/checkout">
+  <input type="hidden" name="product_id" value="{{ product['id'] }}">
+  <!-- M13 [A06] the price is a hidden field the client can edit ---------- -->
+  <input type="hidden" name="unit_price" value="{{ product['price'] }}">
+  <label>Quantity <input type="number" name="quantity" value="1"></label>
+  <button type="submit">Buy now</button>
+</form>
+{% endblock %}

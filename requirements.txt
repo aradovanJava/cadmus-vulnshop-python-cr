@@ -1,0 +1,10 @@
+# Runtime dependencies for cadmus-vulnshop-cr.
+# THREE PINS ARE DELIBERATELY OUTDATED — they are the CR1 Task 2 / CR3 scan
+# target. Do not "helpfully" upgrade them before the lab.
+Flask==3.0.3
+Jinja2==3.1.4
+Werkzeug==3.0.3
+Flask-WTF==1.2.1          # imported nowhere: CSRFProtect is never applied (T12)
+PyYAML==5.3.1             # CVE-2020-14343  — REACHABLE via /api/import/catalogue
+requests==2.25.1          # CVE-2023-32681  — proxy header leak; no proxy used here
+PyJWT==1.7.1              # CVE-2022-29217  — never imported by any module
